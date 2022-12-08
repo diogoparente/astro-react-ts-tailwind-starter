@@ -1,0 +1,53 @@
+---
+// Component Imports
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+---
+
+<html lang="en">
+  <meta />
+  <title>Hello astro</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
+  <meta name="description" content="Hello astro" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    html,
+    body {
+      font-family: system-ui;
+      margin: 0;
+    }
+    body {
+      padding: 2rem;
+    }
+  </style>
+  <script is:inline>
+    const theme = (() => {
+      if (
+        typeof localStorage !== "undefined" &&
+        localStorage.getItem("theme")
+      ) {
+        return localStorage.getItem("theme");
+      }
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+      }
+      return "light";
+    })();
+
+    if (theme === "light") {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+    window.localStorage.setItem("theme", theme);
+  </script>
+
+  <body class="bg-c1 text-c2">
+    <main>
+      <h1>Hello, Astro!</h1>
+    </main>
+  </body>
+</html>
